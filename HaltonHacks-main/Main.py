@@ -352,6 +352,9 @@ def options():
         pygame.display.update()
 
 def main_menu():
+    
+    mixer.music.load('/Users/nirekshetty/Downloads/HaltonHacks-main/assets/Soundtrack.mp3')
+    mixer.music.play()
     while True:
         WIN.blit(BG, (0, 0))
 
