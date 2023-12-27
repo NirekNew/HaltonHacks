@@ -53,6 +53,8 @@ class Button():
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
 
+
+
 def play():
     while True:
         handCascade = cv2.CascadeClassifier('/Users/nirekshetty/Downloads/cv2/hand.xml')
@@ -123,8 +125,7 @@ def play():
                 self.height = height
 
             def draw(self, win):
-                pygame.draw.rect(
-                    win, self.COLOR, (self.x, self.y, self.width, self.height))
+                pygame.draw.rect(win, self.COLOR, (self.x, self.y, self.width, self.height))
 
             def move(self, up=True , N = False):
                 if N == True:
@@ -158,8 +159,9 @@ def play():
                 self.size = 12
 
             def draw(self, win):
-                pygame.draw.circle(win, self.COLOR, (self.x, self.y), self.radius)
-
+                IMAGE = pygame.transform.scale(pygame.image.load('assets/cat.png').convert() , (50 , 50))  # or .convert_alpha()
+                ball_rect = IMAGE.get_rect(center=(self.x, self.y))
+                win.blit(IMAGE, ball_rect)
             def move(self):
                 self.x += self.x_vel
                 self.y += self.y_vel
@@ -301,10 +303,10 @@ def play():
                 won = False
                 if left_score >= WINNING_SCORE:
                     won = True
-                    win_text = "Left Player Won!"
+                    win_text = "Player Won!"
                 elif right_score >= WINNING_SCORE:
                     won = True
-                    win_text = "Right Player Won!"
+                    win_text = "AI Won!"
 
                 if won:
                     text = SCORE_FONT.render(win_text, 1, WHITE)
@@ -355,15 +357,15 @@ def main_menu():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
-        MENU_TEXT = get_font(100).render("MAIN MENU", True, "#b68f40")
+        MENU_TEXT = get_font(100).render("", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
 
-        PLAY_BUTTON = Button(image=pygame.image.load("assets/Play.png"), pos=(640, 250), 
-                            text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        OPTIONS_BUTTON = Button(image=pygame.image.load("assets/Options.png"), pos=(640, 400), 
-                            text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit.png"), pos=(640, 550), 
-                            text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+        PLAY_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/Play.png"),(240,60)) , pos=(1000, 350) , 
+                            text_input="PLAY", font=get_font(30), base_color="#d7fcd4", hovering_color="White")
+        OPTIONS_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/Options.png"),(400,60)), pos=(1000,450), 
+                            text_input="OPTIONS", font=get_font(30), base_color="#d7fcd4", hovering_color="White")
+        QUIT_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/QUit.png"),(240,60)), pos=(1000 , 550), 
+                            text_input="QUIT", font=get_font(30), base_color="#d7fcd4", hovering_color="White")
 
         WIN.blit(MENU_TEXT, MENU_RECT)
 
