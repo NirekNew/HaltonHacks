@@ -3,6 +3,10 @@ import cv2
 import time
 import sys
 import random
+from pygame import mixer
+mixer.init()
+
+mixer.init()
 
 pygame.init()
 
@@ -222,6 +226,8 @@ def play():
                         reduction_factor = (left_paddle.height / 2) / ball.MAX_VEL
                         y_vel = difference_in_y / reduction_factor
                         ball.y_vel = -1 * y_vel
+                        mixer.music.load('sound.mp3')
+                        mixer.music.play()
 
             else:
                 if ball.y >= right_paddle.y and ball.y <= right_paddle.y + right_paddle.height:
@@ -233,6 +239,8 @@ def play():
                         reduction_factor = (right_paddle.height / 2) / ball.MAX_VEL
                         y_vel = difference_in_y / reduction_factor
                         ball.y_vel = -1 * y_vel
+                        mixer.music.load('sound.mp3')
+                        mixer.music.play()
 
 
         def handle_paddle_movement(keys, left_paddle, right_paddle , ball):
